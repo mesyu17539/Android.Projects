@@ -14,22 +14,22 @@
             android:layout_height="wrap_content"
             android:textColor="#ffffff"
             android:textSize="25dp"
-            android:text="친구"/>
+            android:text="  친구"/>
         <TextView
             android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAlignment="center"
-            android:textColor="#ffffff"
-            android:textSize="20dp"
-            android:text="설정"/>
-
+            android:textColor="#000000"
+            android:textSize="25dp"
+            android:background="@drawable/settingp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAlignment="center"
             android:textColor="#ffffff"
             android:textSize="20dp"
+            android:layout_weight="1"
             android:text="로그아웃"/>
     </LinearLayout>
 
