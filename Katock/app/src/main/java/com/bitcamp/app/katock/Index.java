@@ -26,7 +26,7 @@ public class Index extends AppCompatActivity {
         findViewById(R.id.loginbtn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new Intro.loginService() {
+                new Intro.loginService(){
                     @Override
                     public void execute() {
 //                        boolean loginOk=exist.execute( String.valueOf(

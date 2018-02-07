@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 public class Intro extends AppCompatActivity {
 
     SQLiteOpenHelper helper=null;
@@ -47,6 +49,7 @@ public class Intro extends AppCompatActivity {
         String userid,password,name,email,phoneNumber,profilePhoto,address;
     }
     static interface loginService{public void execute();}
+    static interface ListService{public ArrayList<?> execute();}//? generic 와일드카드타입 <member>
     static abstract class QueryFactory {
         Context context;
 
