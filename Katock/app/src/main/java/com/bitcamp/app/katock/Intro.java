@@ -38,7 +38,7 @@ public class Intro extends AppCompatActivity {
     }
     static final String DATABASE_NAME = "kakao.db";
     static final String TABLE_MEMBER = "member";
-    static final String MEMBER_1 = "id";
+    static final String MEMBER_1 = "userid";
     static final String MEMBER_2 = "password";
     static final String MEMBER_3 = "name";
     static final String MEMBER_4 = "email";
@@ -47,9 +47,14 @@ public class Intro extends AppCompatActivity {
     static final String MEMBER_7 = "address";
     static class Member{
         String userid,password,name,email,phoneNumber,profilePhoto,address;
+        public String toString(){
+            return userid+","+password+
+                    ","+name+","+email+","+phoneNumber+","+profilePhoto+","+address;
+        }
     }
     static interface loginService{public void execute();}
     static interface ListService{public ArrayList<?> execute();}//? generic 와일드카드타입 <member>
+    static interface DetailService{public Object execute();}
     static abstract class QueryFactory {
         Context context;
 
@@ -85,7 +90,7 @@ public class Intro extends AppCompatActivity {
                                         " VALUES('%s', '%s', '%s', '%s', '%s', '%s');",
                                 TABLE_MEMBER, MEMBER_2, MEMBER_3,
                                 MEMBER_4, MEMBER_5, MEMBER_6, MEMBER_7,
-                                "1", "홍길동"+i, "hong"+i+"@gmail.com", "010-3453-443"+i, "default_profile",
+                                "1", "홍길동"+i, "hong"+i+"@gmail.com", "010-3453-443"+i, "profile_"+i,
                                 "서울 백범로 "+i+"길"));
             }
 

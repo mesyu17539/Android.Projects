@@ -14,13 +14,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/profile_photo"
-        android:textSize="80dp"
+        android:textSize="25dp"
         android:textStyle="bold"/>
     <TextView
         android:id="@+id/phonenum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/name"
-        android:textSize="15dp"
+        android:textSize="20dp"
         android:textStyle="normal"/>
 </RelativeLayout>

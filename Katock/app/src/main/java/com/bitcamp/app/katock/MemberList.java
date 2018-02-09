@@ -1,10 +1,10 @@
 package com.bitcamp.app.katock;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.support.v4.view.LayoutInflaterFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,6 +16,9 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.bitcamp.app.katock.Intro.*;
 
 import java.util.ArrayList;
 
@@ -57,7 +60,7 @@ public class MemberList extends AppCompatActivity {
 //            }
 //        });
         //후
-        listView.setAdapter(new MemberItem(context,(ArrayList<Intro.Member>) new Intro.ListService() {
+        listView.setAdapter(new MemberItem(context,(ArrayList<Member>) new Intro.ListService() {
             @Override
             public ArrayList<?> execute() {
                 return new MemberItemList(context).list();
@@ -66,7 +69,16 @@ public class MemberList extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int pos, long id) {
-
+                Member selectedMember = (Member) listView.getItemAtPosition(pos);
+                Toast.makeText(context,"인덱스 "+id+"번째 발견! 짜란~",Toast.LENGTH_LONG).show();
+                Toast.makeText(context,"빈 객체는 "+selectedMember.userid+"번째 발견! 짜란~",Toast.LENGTH_LONG).show();
+                Intent intent=new Intent(context,MemberDetail.class);
+                intent.putExtra(Intro.MEMBER_1,selectedMember.userid);//추가
+                intent.putExtra(Intro.MEMBER_3,selectedMember.name);//추가
+                intent.putExtra(Intro.MEMBER_5,selectedMember.phoneNumber);//추가
+                intent.putExtra(Intro.MEMBER_6,selectedMember.profilePhoto);//추가
+                startActivity(intent);
+//                startActivity(new Intent(context,MemberDetail.class).putExtra(Intro.MEMBER_1,selectedMember.userid).putExtra(Intro.MEMBER_3,selectedMember.name).putExtra(Intro.MEMBER_5,selectedMember.phoneNumber));
             }
         });
 
@@ -89,34 +101,25 @@ public class MemberList extends AppCompatActivity {
         public MemberItemList(Context context) {
             super(context);
         }
-        public ArrayList<Intro.Member> list(){
-            ArrayList<Intro.Member> members=new ArrayList();
+        public ArrayList<Member> list(){
+            ArrayList<Member> members=new ArrayList();
             String sql=String.format(
                     "SELECT %s,%s,%s,%s" +
                     " FROM %s"
                     ,Intro.MEMBER_1,Intro.MEMBER_3,Intro.MEMBER_5,Intro.MEMBER_6
                     ,Intro.TABLE_MEMBER);
-            Log.d("접근","쿼리"+String.format(
-                    "SELECT %s,%s,%s,%s" +
-                            " FROM %s"
-                    ,Intro.MEMBER_1,Intro.MEMBER_3,Intro.MEMBER_5,Intro.MEMBER_6
-                    ,Intro.TABLE_MEMBER));
             Cursor cursor = this.getDatabase()
                     .rawQuery(sql,null);
-            Intro.Member member=null;
+            Member member=null;
             //static 이라서 get set 없이한다. 속도 때문에
             if(cursor != null){
                 Log.d("접근","중");
                 while(cursor.moveToNext()){
-                    member =new Intro.Member();
+                    member =new Member();
                     member.userid=cursor.getString(cursor.getColumnIndex(Intro.MEMBER_1));
-                    Log.d("접근","맴버"+ member.userid);
                     member.name=cursor.getString(cursor.getColumnIndex(Intro.MEMBER_3));
-                    Log.d("접근","맴버"+member.name);
                     member.phoneNumber=cursor.getString(cursor.getColumnIndex(Intro.MEMBER_5));
-                    Log.d("접근","맴버"+member.phoneNumber);
                     member.profilePhoto=cursor.getString(cursor.getColumnIndex(Intro.MEMBER_6));
-                    Log.d("접근","맴버"+member.profilePhoto);
                     members.add(member);
                 }
             }
@@ -126,20 +129,20 @@ public class MemberList extends AppCompatActivity {
     }
     //람다 후
     private class MemberItem extends BaseAdapter{//생성자없이 끝나서 추상팩토리아님
-        ArrayList<Intro.Member> list;
+        ArrayList<Member> list;
         LayoutInflater inflater;//대화창 풍선에 글자 띄우기.
-        public MemberItem(Context context,ArrayList<Intro.Member> list){
+        public MemberItem(Context context,ArrayList<Member> list){
             this.list=list;
             this.inflater=LayoutInflater.from(context);
         }
         private int[] photo={
-            R.drawable.cupcake,
-                R.drawable.eclair,
-                R.drawable.froyo,
-                R.drawable.donut,
-                R.drawable.icecream,
+            R.drawable.profile_1,
+                R.drawable.profile_2,
+                R.drawable.profile_3,
+                R.drawable.profile_4,
+                R.drawable.profile_5,
+                R.drawable.profile_6,
                 R.drawable.lollipop
-                ,R.drawable.gingerbread
         };
         @Override
         public int getCount() {
@@ -169,7 +172,7 @@ public class MemberList extends AppCompatActivity {
             }else{
                 holder= (ViewHoder) v.getTag();
             }
-            holder.profilephoto.setImageResource(photo[i]);
+            holder.profilephoto.setImageResource(photo[i]);//이거 인덱스로하면 안됨.
             holder.name.setText(list.get(i).name);
             holder.phonenum.setText(list.get(i).phoneNumber);
             return v;
