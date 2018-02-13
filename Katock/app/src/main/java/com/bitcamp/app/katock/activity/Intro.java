@@ -1,4 +1,4 @@
-package com.bitcamp.app.katock;
+package com.bitcamp.app.katock.activity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.bitcamp.app.katock.R;
 
 import java.util.ArrayList;
 
@@ -55,6 +57,7 @@ public class Intro extends AppCompatActivity {
     static interface loginService{public void execute();}
     static interface ListService{public ArrayList<?> execute();}//? generic 와일드카드타입 <member>
     static interface DetailService{public Object execute();}
+    static interface DMLService{public void execute();}
     static abstract class QueryFactory {
         Context context;
 
@@ -75,13 +78,16 @@ public class Intro extends AppCompatActivity {
         public void onCreate(SQLiteDatabase db) {
             db.execSQL(
                     String.format(" CREATE TABLE IF NOT EXISTS %s( " +
-                                    " %s INTEGER PRIMARY KEY AUTOINCREMENT, "+
+                                    " %s INTEGER PRIMARY KEY AUTOINCREMENT, "+//id 자동증가
                                     " %s TEXT, " +
                                     " %s TEXT, " +
                                     " %s TEXT, " +
                                     " %s TEXT, " +
                                     " %s TEXT, " +
-                                    " %s TEXT );", TABLE_MEMBER, MEMBER_1, MEMBER_2, MEMBER_3,
+                                    " %s TEXT );",
+                            TABLE_MEMBER,
+                            MEMBER_1,
+                            MEMBER_2, MEMBER_3,
                             MEMBER_4, MEMBER_5, MEMBER_6, MEMBER_7));
             for(int i=1; i<6; i++) {
                 db.execSQL(
