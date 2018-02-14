@@ -24,6 +24,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/broder"
             android:layout_marginTop="50dp"
+            android:text="1"
             android:hint="아이디" />
 
         <EditText
@@ -32,6 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:background="@drawable/broder"
+            android:text="1"
             android:hint="비밀번호" />
 
         <Button

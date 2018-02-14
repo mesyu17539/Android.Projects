@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+body {margin: 0; background-color: #9bbad7}
+footer {margin-top: 550px; margin-right: 40px}
+.message {float: right; height: 32px; width: 70%}
+.confirm {float: right; height: 37px; width: 15%; background-color: #ffeb00; border: none}
+</style>
+<body>
+<section>
+    <aside>
+
+    </aside>
+</section>
+<footer>
+    <button id="send_btn" class="confirm" > 전송 </button>
+    <input id="send-msg" class="message" type="text" />
+</footer>
+</body>
+<script>
+    document.getElementById("send_btn").addEventListener('click',function(){
+        var message = document.getElementById('send-msg').value;
+        Mybrid.showToast(message);
+    });
+</script>
+</html>

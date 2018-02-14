@@ -167,6 +167,21 @@
             android:textColor="@android:color/white"
             android:background="#301f31"
             android:layout_weight="1"/>
-
+        <Button
+            android:id="@+id/message_btn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="message"
+            android:textColor="@android:color/white"
+            android:background="#301f31"
+            android:layout_weight="1"/>
+        <Button
+            android:id="@+id/map_btn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="map"
+            android:textColor="@android:color/white"
+            android:background="#301f31"
+            android:layout_weight="1"/>
     </LinearLayout>
 </LinearLayout>

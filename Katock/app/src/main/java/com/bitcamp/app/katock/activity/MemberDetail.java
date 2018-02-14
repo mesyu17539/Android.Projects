@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bitcamp.app.ho.Maps;
 import com.bitcamp.app.katock.R;
 import com.bitcamp.app.katock.util.Email;
 import com.bitcamp.app.katock.util.Phone;
@@ -128,6 +129,23 @@ public class MemberDetail extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        findViewById(R.id.message_btn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(context,Massage.class));
+            }
+        });
+        findViewById(R.id.map_btn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent1=new Intent(context, Maps.class);
+                member.address="37.5597680, 126.9423080";//split으로 나누어줄거다
+                intent1.putExtra("address",member.address);
+                startActivity(intent1);
+            }
+        });{
+
+        }
     }
     //추상팩토리 두개가 합쳐 하나로 있다. 인터페이스를 제공하는 패턴.
     private abstract class DetailQuery extends Intro.QueryFactory{//추상팩토리
